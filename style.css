@@ -7,6 +7,7 @@
     --info-color: #e74c3c; /* Rosso chiaro */
     --light-color: #f5f5f5; /* Grigio chiaro caldo */
     --dark-color: #2c3e50; /* Grigio scuro bluastro */
+    --highlight-color: #ff5733; /* Rosso-arancio evidenziato */
     --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -22,6 +23,7 @@ body {
     line-height: 1.6;
     color: var(--dark-color);
     scroll-behavior: smooth;
+    background-color: var(--light-color);
 }
 
 /* Hero Section */
@@ -74,6 +76,7 @@ body {
 
 .hover-card:hover .icon-circle {
     transform: scale(1.1);
+    background-color: var(--primary-color); /* Colore caldo al hover */
 }
 
 /* Sezioni alternate */
@@ -87,12 +90,15 @@ section:nth-child(even) {
     border-radius: 10px;
     overflow: hidden;
     transition: all 0.3s ease;
+    background-color: #fff;
 }
 
 .card-header {
     border-bottom: none;
     font-weight: bold;
     padding: 1rem 1.5rem;
+    background-color: var(--secondary-color);
+    color: #fff;
 }
 
 .card-body {
@@ -102,6 +108,7 @@ section:nth-child(even) {
 /* Navbar personalizzata */
 .navbar {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: var(--primary-color); /* Navbar con un colore caldo */
 }
 
 .navbar-brand {
@@ -123,6 +130,8 @@ section:nth-child(even) {
     border-radius: 25px;
     padding: 0.5rem 1.5rem;
     font-weight: 500;
+    background-color: var(--primary-color);
+    color: #fff;
     transition: all 0.3s ease;
 }
 
@@ -139,6 +148,7 @@ section:nth-child(even) {
 .display-1, .display-2, .display-3, .display-4, .display-5 {
     font-weight: bold;
     margin-bottom: 1rem;
+    color: var(--primary-color);
 }
 
 /* Liste personalizzate */
@@ -150,6 +160,8 @@ section:nth-child(even) {
 /* Footer */
 footer {
     margin-top: auto;
+    background-color: var(--dark-color);
+    color: #fff;
 }
 
 footer a {
