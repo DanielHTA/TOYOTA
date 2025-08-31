@@ -1,10 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
-    
     initSmoothScrolling();
     initActiveNavigation();
     initScrollAnimations();
     initCardHoverEffects();
     initTooltips();
+    addIconEffects();
+    initMobileMenu();
+    highlightMethodDifferences();
+    initBackToTop();
+    loadSavedTheme();
+    logPerformance();
     
     console.log('🚗 Toyota Production System - Sito caricato correttamente!');
 });
@@ -148,7 +153,7 @@ function animateCounters() {
             
             if (value < target) {
                 counter.innerText = Math.ceil(value + data);
-                setTimeout(animate, 1);
+                requestAnimationFrame(animate); // Ottimizzazione con requestAnimationFrame
             } else {
                 counter.innerText = target;
             }
@@ -160,6 +165,7 @@ function animateCounters() {
 
 window.addEventListener('error', function(e) {
     console.error('Errore JavaScript:', e.error);
+    alert("Si è verificato un errore. Contatta il supporto.");
 });
 
 function highlightMethodDifferences() {
@@ -188,12 +194,6 @@ function highlightMethodDifferences() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    addIconEffects();
-    initMobileMenu();
-    highlightMethodDifferences();
-});
-
 function initBackToTop() {
     const backToTopBtn = document.querySelector('footer a[href="#home"]');
     
@@ -207,10 +207,6 @@ function initBackToTop() {
         });
     }
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-    initBackToTop();
-});
 
 function toggleDarkMode() {
     const body = document.body;
@@ -232,13 +228,9 @@ function loadSavedTheme() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', loadSavedTheme);
-
 function logPerformance() {
     window.addEventListener('load', function() {
         const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
         console.log(`⚡ Tempo di caricamento: ${loadTime}ms`);
     });
 }
-
-logPerformance();
