@@ -13,6 +13,7 @@
       font-size: 18px;
       scroll-behavior: smooth;
       color: #222;
+      background: #fefefe;
     }
     header {
       background: linear-gradient(90deg, #c41717, #e63946);
@@ -45,7 +46,7 @@
     }
     section {
       padding: 3rem 1rem;
-      max-width: 1000px;
+      max-width: 1100px;
       margin: auto;
     }
     section:nth-child(even) {
@@ -92,6 +93,12 @@
       margin-top: 2rem;
       font-size: 16px;
     }
+    img {
+      max-width: 100%;
+      border-radius: 6px;
+      margin: 1rem 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
   </style>
 </head>
 <body>
@@ -101,6 +108,7 @@
   </header>
 
   <nav>
+    <a href="#intro">Introduzione</a>
     <a href="#pull">Pull</a>
     <a href="#muda">MUDA</a>
     <a href="#jit">JIT</a>
@@ -113,93 +121,72 @@
   <section id="intro">
     <div class="icon-title"><i class="fa-solid fa-book-open"></i><h2>Introduzione</h2></div>
     <p>
-      Il <strong>Toyota Production System (TPS)</strong> è un modello nato in Giappone dopo la Seconda Guerra Mondiale 
-      con l’obiettivo di rendere la produzione più snella, flessibile e vicina ai bisogni reali dei clienti. 
-      A differenza dei sistemi tradizionali, non punta soltanto alla quantità prodotta, ma al valore creato per chi acquista. 
-      Da questo approccio nascerà il concetto moderno di <em>Lean Production</em>.
+      Il <strong>Toyota Production System (TPS)</strong> nasce in Giappone tra gli anni ’40 e ’50, grazie a figure come 
+      <em>Taichi Ohno</em> ed <em>Eiji Toyoda</em>. In un contesto di scarsità di risorse, Toyota non poteva adottare 
+      il modello americano basato sulla produzione di massa e sulle grandi scorte. Da questa necessità nacque un sistema 
+      che riduceva al minimo gli sprechi e massimizzava il valore per il cliente.
+    </p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Toyota_Production_System.png" alt="Schema TPS (Wikimedia)">
+    <p>
+      Questo approccio si è poi diffuso a livello globale e oggi rappresenta la base di quella che chiamiamo 
+      <strong>Lean Production</strong>.
     </p>
   </section>
 
   <section id="pull">
     <div class="icon-title"><i class="fa-solid fa-arrow-down-short-wide"></i><h2>Pull (Produzione tirata)</h2></div>
     <p>
-      Nel sistema <strong>Pull</strong>, la produzione parte solo quando c’è una richiesta reale del cliente. 
-      Questo evita di accumulare scorte inutili e riduce gli sprechi legati alla sovrapproduzione. 
-      Strumenti come il <em>Kanban</em> permettono di coordinare i flussi e garantire che i materiali arrivino 
-      solo quando servono.
+      Nel sistema <strong>Pull</strong> la produzione si attiva solo quando il cliente effettivamente ordina. 
+      L’obiettivo è ridurre gli inventari e lavorare in base alla domanda reale, evitando sprechi. 
+      Lo strumento più rappresentativo è il <em>Kanban</em>, una sorta di “cartellino” che segnala il fabbisogno di materiali.
     </p>
-    <div class="card">
-      <p>In breve: non si produce “in anticipo”, ma si risponde al ritmo della domanda.</p>
-    </div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Kanban_board_example.jpg" alt="Kanban board">
   </section>
 
   <section id="muda">
     <div class="icon-title"><i class="fa-solid fa-trash"></i><h2>MUDA (Sprechi)</h2></div>
     <p>
-      Il termine giapponese <strong>MUDA</strong> indica ciò che non crea valore. 
-      Secondo Toyota, riconoscere e ridurre gli sprechi è la chiave per migliorare l’efficienza. 
-      I sette principali sprechi individuati sono:
+      In giapponese, <strong>Muda</strong> significa “inutilità, spreco”. Secondo Toyota, ogni attività che non aggiunge valore 
+      al prodotto finale per il cliente deve essere eliminata. Sono stati identificati <em>7 tipi principali di sprechi</em>.
     </p>
-    <div class="card">
-      <ol>
-        <li>Sovrapproduzione</li>
-        <li>Attese e tempi morti</li>
-        <li>Trasporti eccessivi</li>
-        <li>Processi ridondanti o inutili</li>
-        <li>Scorte non necessarie</li>
-        <li>Movimenti fisici inutili</li>
-        <li>Difetti e rilavorazioni</li>
-      </ol>
-    </div>
-    <p>
-      Eliminare il MUDA significa concentrare risorse ed energie solo su ciò che porta valore al cliente finale.
-    </p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Muda_types.png" alt="I sette tipi di sprechi (MUDA)">
   </section>
 
   <section id="jit">
     <div class="icon-title"><i class="fa-solid fa-clock"></i><h2>Just In Time (JIT)</h2></div>
     <p>
-      Il principio del <strong>Just In Time</strong> si riassume così: “il pezzo giusto, nella quantità giusta, 
-      al momento giusto”. L’obiettivo è ridurre al minimo i magazzini e creare un flusso produttivo continuo. 
-      Per funzionare, il JIT richiede relazioni stabili con i fornitori e processi interni ben sincronizzati.
+      Il <strong>Just In Time</strong> rappresenta uno dei pilastri del TPS. Significa produrre solo ciò che serve, 
+      nella quantità giusta, al momento giusto. Questo riduce costi di magazzino e accelera i tempi di consegna. 
+      Tuttavia, richiede grande coordinamento con i fornitori e processi interni molto affidabili.
     </p>
-    <div class="card">
-      <p>Un sistema ben organizzato consente di reagire rapidamente alle variazioni della domanda senza sprechi.</p>
-    </div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Just_in_time_production.png" alt="Schema Just in Time">
   </section>
 
   <section id="jidoka">
     <div class="icon-title"><i class="fa-solid fa-shield-halved"></i><h2>Jidoka (Qualità alla fonte)</h2></div>
     <p>
-      Con il concetto di <strong>Jidoka</strong>, la qualità non è controllata solo alla fine, 
-      ma integrata in ogni fase del processo. 
-      Quando si presenta un problema, le macchine e gli operatori fermano la produzione per risolverlo subito, 
-      evitando che i difetti si propaghino lungo la linea.
+      Il principio del <strong>Jidoka</strong> assicura che la qualità venga garantita lungo tutto il processo produttivo. 
+      Ogni macchina o operatore ha l’autorità di fermare la produzione in caso di difetto. 
+      Questo evita che un errore si propaghi e diventi un costo elevato.
     </p>
-    <div class="card">
-      <p>“Fermarsi per non sprecare” diventa quindi un valore: meglio un breve stop che un lotto intero da scartare.</p>
-    </div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Jidoka_machine_stop.png" alt="Concetto di Jidoka">
   </section>
 
   <section id="kaizen">
     <div class="icon-title"><i class="fa-solid fa-arrows-rotate"></i><h2>Kaizen (Miglioramento continuo)</h2></div>
     <p>
-      Il termine giapponese <strong>Kaizen</strong> significa “cambiare in meglio”. 
-      Non si tratta di rivoluzioni improvvise, ma di piccoli miglioramenti costanti, giorno dopo giorno. 
-      Tutti i membri dell’organizzazione – dal top management agli operai – sono coinvolti nel proporre soluzioni 
-      e nel migliorare i processi.
+      <strong>Kaizen</strong> significa “cambiare per migliorare”. È un approccio culturale che incoraggia piccoli 
+      miglioramenti costanti. Tutti i lavoratori, dai dirigenti agli operai, sono coinvolti. 
+      Grazie al Kaizen, Toyota e molte altre aziende hanno sviluppato una mentalità orientata all’apprendimento continuo.
     </p>
-    <div class="card">
-      <p>Kaizen è cultura: un modo di pensare che mette al centro le persone e la crescita collettiva.</p>
-    </div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Kaizen_cycle.png" alt="Ciclo Kaizen">
   </section>
 
   <section id="confronto">
     <div class="icon-title"><i class="fa-solid fa-scale-balanced"></i><h2>Confronto: Taylorismo, Fordismo e TPS</h2></div>
     <p>
-      Per comprendere la portata innovativa del TPS è utile confrontarlo con i modelli precedenti: 
-      il <strong>Taylorismo</strong> (organizzazione scientifica del lavoro) e il <strong>Fordismo</strong> 
-      (produzione di massa con catena di montaggio).
+      Il TPS nasce in forte discontinuità rispetto ai modelli americani di inizio Novecento. 
+      Vediamo le principali differenze:
     </p>
     <table>
       <tr>
@@ -210,56 +197,53 @@
       </tr>
       <tr>
         <td>Focus</td>
-        <td>Efficienza del compito individuale</td>
-        <td>Produzione standardizzata su larga scala</td>
-        <td>Valore per il cliente e flusso snello</td>
+        <td>Efficienza dell’individuo</td>
+        <td>Produzione standardizzata</td>
+        <td>Valore e flusso snello</td>
       </tr>
       <tr>
         <td>Qualità</td>
-        <td>Controllo a posteriori</td>
+        <td>Controllo finale</td>
         <td>Reparti dedicati</td>
-        <td>Qualità integrata (Jidoka)</td>
+        <td>Qualità integrata</td>
       </tr>
       <tr>
         <td>Gestione scorte</td>
-        <td>Produzione spinta (push)</td>
+        <td>Produzione “push”</td>
         <td>Grandi magazzini</td>
-        <td>Sistema tirato (Pull, JIT)</td>
+        <td>Pull e JIT</td>
       </tr>
       <tr>
         <td>Ruolo persone</td>
-        <td>Esecuzione ripetitiva</td>
-        <td>Operatori specializzati su compiti semplici</td>
-        <td>Partecipazione attiva (Kaizen)</td>
+        <td>Esecutori</td>
+        <td>Specialisti</td>
+        <td>Partecipazione attiva</td>
       </tr>
     </table>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Ford_assembly_line_1913.jpg" alt="Catena di montaggio Ford (1913)">
   </section>
 
   <section id="aziende">
     <div class="icon-title"><i class="fa-solid fa-building"></i><h2>Aziende e applicazioni</h2></div>
     <p>
-      Nel tempo, i diversi approcci produttivi hanno trovato applicazione in settori e aziende differenti:
+      I diversi approcci hanno avuto applicazioni concrete in numerose aziende:
     </p>
     <h3><i class="fa-solid fa-check"></i> TPS / Lean</h3>
-    <p>Toyota rimane il punto di riferimento, ma molte altre realtà hanno adottato il modello snello:</p>
     <ul>
-      <li>Honda, Porsche e BMW nel settore automotive</li>
-      <li>Intel e Dell nel settore tecnologico</li>
-      <li>Zara nel fast fashion</li>
+      <li><strong>Toyota</strong> (automotive)</li>
+      <li><strong>Honda, Porsche, BMW</strong> nel settore auto</li>
+      <li><strong>Dell</strong> (informatica, produzione su ordine)</li>
+      <li><strong>Zara</strong> (fast fashion, logistica snella)</li>
     </ul>
     <h3><i class="fa-solid fa-check"></i> Fordismo</h3>
-    <p>È stato il modello dominante del Novecento:</p>
     <ul>
-      <li>Ford Motor Company con la celebre Model T</li>
-      <li>Industrie di elettrodomestici e alimentari</li>
+      <li><strong>Ford Motor Company</strong> con la Model T</li>
+      <li>Settori come elettrodomestici e alimentari</li>
     </ul>
     <h3><i class="fa-solid fa-check"></i> Taylorismo</h3>
-    <p>
-      Iniziato con le ricerche di Frederick Taylor, ha influenzato diversi settori:
-    </p>
     <ul>
-      <li>Bethlehem Steel (origine degli studi)</li>
-      <li>Fast food come McDonald’s</li>
+      <li><strong>Bethlehem Steel</strong>, dove nacque lo studio di Taylor</li>
+      <li><strong>McDonald’s</strong>, con processi standardizzati</li>
     </ul>
   </section>
 
