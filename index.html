@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toyota Production System (TPS)</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+    header {
+      background: linear-gradient(90deg, #c41717, #e63946);
+      color: white;
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #222;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: white;
+      padding: 0.8rem 1.2rem;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    nav a:hover {
+      background: #e63946;
+    }
+    section {
+      padding: 3rem 1rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    section:nth-child(even) {
+      background: #f8f9fa;
+    }
+    h2 {
+      color: #c41717;
+      margin-bottom: 1rem;
+    }
+    .icon-title {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    ul, ol { margin-left: 1.5rem; }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.8rem;
+      text-align: left;
+    }
+    th {
+      background: #c41717;
+      color: white;
+    }
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #222;
+      color: white;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><i class="fa-solid fa-industry"></i> Toyota Production System</h1>
+    <p>Il modello che ha ispirato la Lean Production</p>
+  </header>
+
+  <nav>
+    <a href="#pull">Pull</a>
+    <a href="#muda">MUDA</a>
+    <a href="#jit">JIT</a>
+    <a href="#jidoka">Jidoka</a>
+    <a href="#kaizen">Kaizen</a>
+    <a href="#confronto">Confronto</a>
+    <a href="#aziende">Aziende</a>
+  </nav>
+
+  <section id="intro">
+    <div class="icon-title"><i class="fa-solid fa-book-open"></i><h2>Introduzione</h2></div>
+    <p>Il Toyota Production System (TPS) è un modello di organizzazione industriale sviluppato da Toyota in Giappone. 
+    Alla base della Lean Production, mira a creare valore eliminando gli sprechi, migliorando i processi e responsabilizzando le persone.</p>
+  </section>
+
+  <section id="pull">
+    <div class="icon-title"><i class="fa-solid fa-arrow-down-short-wide"></i><h2>Pull (Produzione tirata)</h2></div>
+    <div class="card">
+      <ul>
+        <li>Produzione guidata dalla domanda reale del cliente.</li>
+        <li>Minimizza scorte e sovrapproduzione.</li>
+        <li>Strumenti: Kanban, Heijunka, Takt Time.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="muda">
+    <div class="icon-title"><i class="fa-solid fa-trash"></i><h2>MUDA (Sprechi)</h2></div>
+    <p>Eliminare tutto ciò che non crea valore per il cliente. I 7 sprechi classici sono:</p>
+    <div class="card">
+      <ol>
+        <li>Sovrapproduzione</li>
+        <li>Attese</li>
+        <li>Trasporti</li>
+        <li>Processi inutili</li>
+        <li>Scorte</li>
+        <li>Movimenti inutili</li>
+        <li>Difetti</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="jit">
+    <div class="icon-title"><i class="fa-solid fa-clock"></i><h2>Just In Time (JIT)</h2></div>
+    <div class="card">
+      <ul>
+        <li>Il pezzo giusto, nella quantità giusta, al momento giusto.</li>
+        <li>Richiede fornitori affidabili e processi stabili.</li>
+        <li>Obiettivo: flusso continuo e riduzione scorte.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="jidoka">
+    <div class="icon-title"><i class="fa-solid fa-shield-halved"></i><h2>Jidoka (Qualità alla fonte)</h2></div>
+    <div class="card">
+      <ul>
+        <li>Il processo si ferma quando si verifica un’anomalia.</li>
+        <li>Si previene la propagazione dei difetti.</li>
+        <li>Si individuano e risolvono le cause alla radice.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="kaizen">
+    <div class="icon-title"><i class="fa-solid fa-arrows-rotate"></i><h2>Kaizen (Miglioramento continuo)</h2></div>
+    <div class="card">
+      <ul>
+        <li>Miglioramenti quotidiani, anche piccoli.</li>
+        <li>Coinvolge tutti, dal management agli operatori.</li>
+        <li>Usa cicli PDCA (Plan-Do-Check-Act).</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="confronto">
+    <div class="icon-title"><i class="fa-solid fa-scale-balanced"></i><h2>Confronto: Taylorismo, Fordismo e TPS</h2></div>
+    <table>
+      <tr>
+        <th>Aspetto</th>
+        <th>Taylorismo</th>
+        <th>Fordismo</th>
+        <th>TPS / Lean</th>
+      </tr>
+      <tr>
+        <td>Focus</td>
+        <td>Efficienza del compito</td>
+        <td>Produzione di massa</td>
+        <td>Flusso di valore, eliminazione sprechi</td>
+      </tr>
+      <tr>
+        <td>Qualità</td>
+        <td>Controllo a valle</td>
+        <td>Reparti dedicati</td>
+        <td>Qualità alla fonte (Jidoka)</td>
+      </tr>
+      <tr>
+        <td>Scorte</td>
+        <td>Produzione spinta (push)</td>
+        <td>Grandi magazzini</td>
+        <td>Pull e JIT</td>
+      </tr>
+      <tr>
+        <td>Ruolo persone</td>
+        <td>Esecuzione</td>
+        <td>Compiti ripetitivi</td>
+        <td>Coinvolgimento (Kaizen)</td>
+      </tr>
+    </table>
+  </section>
+
+  <section id="aziende">
+    <div class="icon-title"><i class="fa-solid fa-building"></i><h2>Aziende e applicazioni</h2></div>
+    <h3><i class="fa-solid fa-check"></i> TPS / Lean</h3>
+    <ul>
+      <li>Toyota (origine del metodo)</li>
+      <li>Honda, Porsche, BMW</li>
+      <li>Intel, Dell</li>
+      <li>Zara (fast fashion)</li>
+    </ul>
+    <h3><i class="fa-solid fa-check"></i> Fordismo</h3>
+    <ul>
+      <li>Ford Motor Company (Model T)</li>
+      <li>Industrie elettrodomestici e alimentari</li>
+    </ul>
+    <h3><i class="fa-solid fa-check"></i> Taylorismo</h3>
+    <ul>
+      <li>Bethlehem Steel</li>
+      <li>McDonald's e fast food</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 — Sito didattico sul Toyota Production System</p>
+  </footer>
+</body>
+</html>
