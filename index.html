@@ -1,281 +1,431 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toyota Production System</title>
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  Factory,
+  Boxes,
+  Recycle,
+  Clock,
+  ShieldCheck,
+  RefreshCw,
+  Scale,
+  GitCompare,
+  Landmark,
+  Building2,
+  Users
+} from "lucide-react";
 
-    <!-- Link al file CSS interno -->
-    <style>
-        :root {
-            --primary-color: #f39c12; /* Giallo-arancio */
-            --secondary-color: #e67e22; /* Arancione intenso */
-            --success-color: #d35400; /* Arancio scuro */
-            --danger-color: #c0392b; /* Rosso caldo */
-            --warning-color: #f1c40f; /* Giallo dorato */
-            --info-color: #e74c3c; /* Rosso chiaro */
-            --light-color: #f5f5f5; /* Grigio chiaro caldo */
-            --dark-color: #2c3e50; /* Grigio scuro bluastro */
-            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+// Helpers
+const Section = ({ id, title, subtitle, icon: Icon, children }) => (
+  <section id={id} className="scroll-mt-24 py-16">
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.5 }}
+      className="mx-auto max-w-6xl px-4"
+    >
+      <div className="flex items-center gap-3 mb-6">
+        {Icon && (
+          <span className="p-2 rounded-2xl bg-gradient-to-tr from-amber-200 to-amber-100 text-amber-900 shadow">
+            <Icon className="h-6 w-6" />
+          </span>
+        )}
+        <div>
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">{title}</h2>
+          {subtitle && (
+            <p className="text-sm md:text-base text-slate-600 dark:text-slate-300 mt-1">{subtitle}</p>
+          )}
+        </div>
+      </div>
+      {children}
+    </motion.div>
+  </section>
+);
 
-        /* Reset e impostazioni generali */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+const Pill = ({ children }) => (
+  <span className="inline-flex items-center rounded-full border border-slate-200 dark:border-slate-700 px-3 py-1 text-xs font-medium text-slate-700 dark:text-slate-200 bg-white/60 dark:bg-slate-900/40 backdrop-blur">
+    {children}
+  </span>
+);
 
-        body {
-            font-family: var(--font-family);
-            line-height: 1.6;
-            color: var(--dark-color);
-            scroll-behavior: smooth;
-        }
+const Card = ({ title, icon: Icon, children }) => (
+  <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm hover:shadow-md transition-shadow">
+    <div className="flex items-center gap-3 mb-4">
+      {Icon && <Icon className="h-5 w-5 text-slate-500" />}
+      <h3 className="text-lg font-semibold">{title}</h3>
+    </div>
+    <div className="prose prose-slate dark:prose-invert max-w-none text-sm md:text-base">
+      {children}
+    </div>
+  </div>
+);
 
-        /* Hero Section */
-        .hero-section {
-            background: linear-gradient(135deg, #f5f5f5 0%, #f0e5d8 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+const Stat = ({ label, value }) => (
+  <div className="rounded-2xl bg-gradient-to-br from-slate-50 to-white dark:from-slate-950 dark:to-slate-900 border border-slate-200 dark:border-slate-800 p-5 text-center shadow-sm">
+    <div className="text-3xl font-semibold tracking-tight">{value}</div>
+    <div className="text-slate-500 text-sm mt-1">{label}</div>
+  </div>
+);
 
-        .hero-image {
-            text-align: center;
-            padding: 2rem;
-        }
+const NavLink = ({ href, children }) => (
+  <a href={href} className="px-3 py-2 rounded-xl text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">
+    {children}
+  </a>
+);
 
-        .hero-image i {
-            font-size: 8rem;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        /* Icone circolari */
-        .icon-circle {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .icon-circle i.hovered-icon {
-            transform: scale(1.1) rotate(10deg);
-        }
-
-        /* Hover effect per le card */
-        .hover-card {
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .hover-card.hovered {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Sezioni alternate */
-        section:nth-child(even) {
-            background-color: var(--light-color);
-        }
-
-        /* Navbar personalizzata */
-        .navbar {
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar-brand {
-            font-size: 1.25rem;
-            font-weight: bold;
-        }
-
-        .navbar-nav .nav-link {
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .navbar-nav .nav-link:hover {
-            color: rgba(255, 255, 255, 0.8) !important;
-        }
-
-        /* Bottoni personalizzati */
-        .btn {
-            border-radius: 25px;
-            padding: 0.5rem 1.5rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .btn-lg {
-            padding: 0.75rem 2rem;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Titoli */
-        .display-1, .display-2, .display-3, .display-4, .display-5 {
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-
-        /* Liste personalizzate */
-        .list-unstyled li {
-            margin-bottom: 0.5rem;
-            padding-left: 0.5rem;
-        }
-
-        /* Footer */
-        footer {
-            margin-top: auto;
-        }
-
-        footer a {
-            transition: color 0.3s ease;
-        }
-
-        footer a:hover {
-            color: var(--info-color) !important;
-        }
-
-        /* Gradient per le sezioni */
-        .bg-gradient-primary {
-            background: linear-gradient(135deg, var(--primary-color), #e67e22);
-        }
-
-        /* Modalità scura */
-        body.dark-mode {
-            background-color: #2c3e50;
-            color: #ecf0f1;
-        }
-
-        /* Evidenziazione delle card nei metodi */
-        .card.highlighted {
-            border: 2px solid #0d6efd;
-            transform: scale(1.02);
-        }
-
-        .card.faded {
-            opacity: 0.7;
-        }
-
-        /* Animazione al scroll */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-on-scroll {
-            animation: fadeInUp 0.6s ease-out;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Toyota Production System</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
-                    </li>
-                </ul>
-            </div>
+export default function TPSWebsite() {
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-slate-950 dark:to-slate-900 text-slate-900 dark:text-slate-100">
+      {/* Top bar */}
+      <div className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/70 dark:supports-[backdrop-filter]:bg-slate-950/60 border-b border-slate-200/70 dark:border-slate-800">
+        <nav className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Factory className="h-6 w-6" />
+            <span className="font-semibold tracking-tight">Toyota Production System</span>
+          </div>
+          <div className="hidden md:flex items-center gap-1">
+            <NavLink href="#caratteristiche">Caratteristiche</NavLink>
+            <NavLink href="#pull">Pull</NavLink>
+            <NavLink href="#muda">MUDA</NavLink>
+            <NavLink href="#jit">JIT</NavLink>
+            <NavLink href="#jidoka">Jidoka</NavLink>
+            <NavLink href="#kaizen">Kaizen</NavLink>
+            <NavLink href="#confronti">Confronti</NavLink>
+            <NavLink href="#casi">Aziende</NavLink>
+            <NavLink href="#risorse">Risorse</NavLink>
+          </div>
+          <a
+            href="#casi"
+            className="md:hidden px-3 py-1.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700"
+          >
+            Esplora
+          </a>
         </nav>
-    </header>
+      </div>
 
-    <section class="hero-section" id="home">
-        <div class="hero-image">
-            <i class="fas fa-cogs"></i>
-            <h1 class="display-1">Benvenuti nel Sistema di Produzione Toyota</h1>
+      {/* Hero */}
+      <header className="relative overflow-hidden">
+        <div className="mx-auto max-w-6xl px-4 pt-14 pb-10 md:pt-20 md:pb-16">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h1 className="text-3xl md:text-5xl font-semibold leading-tight tracking-tight">
+                TPS: il metodo Toyota per creare <span className="underline decoration-amber-400 decoration-4 underline-offset-4">valore</span> eliminando gli sprechi
+              </h1>
+              <p className="mt-5 text-slate-600 dark:text-slate-300 text-base md:text-lg">
+                Il Toyota Production System (TPS) è la base della <em>Lean Production</em>: un insieme di principi e pratiche per produrre solo ciò che serve, quando serve, con qualità incorporata nel processo e miglioramento continuo.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-2">
+                <Pill>Pull</Pill>
+                <Pill>MUDA</Pill>
+                <Pill>JIT</Pill>
+                <Pill>Jidoka</Pill>
+                <Pill>Kaizen</Pill>
+              </div>
+            </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative"
+            >
+              <div className="aspect-[4/3] w-full rounded-3xl bg-gradient-to-br from-amber-100 via-white to-amber-50 dark:from-amber-900/20 dark:via-slate-900 dark:to-amber-900/10 p-1">
+                <div className="h-full w-full rounded-2xl border border-amber-200/70 dark:border-amber-900/30 grid place-content-center text-center px-6">
+                  <div className="flex items-center justify-center gap-3 text-amber-700 dark:text-amber-300">
+                    <Boxes className="h-8 w-8" />
+                    <Recycle className="h-8 w-8" />
+                    <Clock className="h-8 w-8" />
+                    <ShieldCheck className="h-8 w-8" />
+                    <RefreshCw className="h-8 w-8" />
+                  </div>
+                  <p className="mt-4 text-sm md:text-base text-slate-700 dark:text-slate-200">
+                    Flussi tirati dal cliente, Just In Time, qualità alla fonte e miglioramento continuo.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
-    </section>
+      </header>
 
-    <section id="about" class="py-5">
-        <h2 class="display-3 text-center">Cosa è TPS?</h2>
-        <div class="container">
-            <p class="lead text-center">Il Toyota Production System (TPS) è un approccio alla gestione della produzione sviluppato da Toyota che enfatizza la riduzione degli sprechi e l’efficienza.</p>
+      {/* Intro */}
+      <Section
+        id="caratteristiche"
+        title="Caratteristiche principali del TPS"
+        subtitle="Una sintesi dei pilastri che hanno ispirato la Lean Production"
+        icon={Landmark}
+      >
+        <div className="grid md:grid-cols-3 gap-6">
+          <Stat label="Sprechi da eliminare (MUDA)" value="7+" />
+          <Stat label="Obiettivi chiave" value="Qualità • Costo • Lead Time" />
+          <Stat label="Cultura" value="Rispetto per le persone" />
         </div>
-    </section>
+        <p className="mt-8 text-slate-600 dark:text-slate-300">
+          Nota: spesso si trova scritto <strong>“Jodoka”</strong>, ma la traslitterazione più diffusa è <strong>Jidoka</strong> (自働化): automazione con un tocco umano, cioè la capacità del processo di fermarsi quando si verifica un'anomalia.
+        </p>
+      </Section>
 
-    <footer class="text-center py-3">
-        <a href="#home">Back to Top</a>
-    </footer>
+      {/* Pull */}
+      <Section id="pull" title="Pull (Produzione tirata)" subtitle="Produrre solo ciò che il cliente richiede" icon={Boxes}>
+        <div className="grid md:grid-cols-2 gap-6">
+          <Card title="Concetto" icon={Boxes}>
+            <ul>
+              <li>Il flusso è guidato dalla domanda reale, non da previsioni.</li>
+              <li>Si minimizzano scorte e sovrapproduzione.</li>
+              <li>Strumenti tipici: <em>Kanban</em>, <em>Heijunka</em> (livellamento), <em>Takt time</em>.</li>
+            </ul>
+          </Card>
+          <Card title="Benefici" icon={Scale}>
+            <ul>
+              <li>Riduzione del capitale immobilizzato in magazzino.</li>
+              <li>Maggiore flessibilità a variazioni della domanda.</li>
+              <li>Visibilità del flusso e delle priorità.</li>
+            </ul>
+          </Card>
+        </div>
+      </Section>
 
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            initSmoothScrolling();
-            initActiveNavigation();
-            initScrollAnimations();
-            initCardHoverEffects();
-            initTooltips();
-            addIconEffects();
-            initMobileMenu();
-            highlightMethodDifferences();
-            initBackToTop();
-            loadSavedTheme();
-            logPerformance();
-            console.log('🚗 Toyota Production System - Sito caricato correttamente!');
-        });
+      {/* MUDA */}
+      <Section id="muda" title="MUDA (Sprechi)" subtitle="Eliminare ciò che non aggiunge valore" icon={Recycle}>
+        <div className="grid md:grid-cols-3 gap-6">
+          <Card title="Le 7 categorie classiche">
+            <ol className="list-decimal pl-5">
+              <li>Sovrapproduzione</li>
+              <li>Attese</li>
+              <li>Trasporti</li>
+              <li>Processi inutili / eccesso di lavorazione</li>
+              <li>Scorte</li>
+              <li>Movimenti inutili</li>
+              <li>Difetti e rilavorazioni</li>
+            </ol>
+          </Card>
+          <Card title="Altri sprechi (estensioni moderne)">
+            <ul>
+              <li>Non sfruttare competenze e creatività delle persone.</li>
+              <li>Energia e impatto ambientale superfluo.</li>
+              <li>Dati non utilizzati e colli di bottiglia informativi.</li>
+            </ul>
+          </Card>
+          <Card title="Strumenti anti–MUDA">
+            <ul>
+              <li><em>Value Stream Mapping</em> (mappatura del flusso di valore).</li>
+              <li>5S (ordine e standardizzazione del posto di lavoro).</li>
+              <li>SMED (riduzione tempi di cambio, <em>Single Minute Exchange of Die</em>).</li>
+            </ul>
+          </Card>
+        </div>
+      </Section>
 
-        function initSmoothScrolling() {
-            const navLinks = document.querySelectorAll('a[href^="#"]');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetSection = document.querySelector(targetId);
-                    if (targetSection) {
-                        const offsetTop = targetSection.offsetTop - 80;
-                        window.scrollTo({
-                            top: offsetTop,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-        }
+      {/* JIT */}
+      <Section id="jit" title="Just In Time (JIT)" subtitle="Il pezzo giusto, nella quantità giusta, al momento giusto" icon={Clock}>
+        <div className="grid md:grid-cols-2 gap-6">
+          <Card title="Componenti del JIT" icon={Clock}>
+            <ul>
+              <li><strong>Takt time</strong>: ritmo imposto dalla domanda del cliente.</li>
+              <li><strong>Flow</strong>: ridurre interruzioni e lotti, favorendo il flusso continuo.</li>
+              <li><strong>Pull</strong>: segnali Kanban per autorizzare la produzione/rifornimento.</li>
+            </ul>
+          </Card>
+          <Card title="Prerequisiti" icon={Building2}>
+            <ul>
+              <li>Processi stabili e tempi di attrezzaggio brevi (SMED).</li>
+              <li>Affidabilità fornitori e logistica sincronizzata.</li>
+              <li>Standard di lavoro chiari e visual management.</li>
+            </ul>
+          </Card>
+        </div>
+      </Section>
 
-        function initActiveNavigation() {
-            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
-            const sections = document.querySelectorAll('section[id]');
-            const updateActiveLink = () => {
-                let currentSection = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    if (window.scrollY >= sectionTop - 150 && window.scrollY < sectionTop + sectionHeight - 150) {
-                        currentSection = section.getAttribute('id');
-                    }
-                });
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${currentSection}`) {
-                        link.classList.add('
+      {/* Jidoka */}
+      <Section id="jidoka" title="Jidoka (Qualità alla fonte)" subtitle="Fermare il processo quando si presenta un'anomalia" icon={ShieldCheck}>
+        <div className="grid md:grid-cols-2 gap-6">
+          <Card title="Cosa significa" icon={ShieldCheck}>
+            <ul>
+              <li>Le macchine (e le persone) rilevano difetti e fermano il flusso.</li>
+              <li>Si previene la trasmissione di errori a valle.</li>
+              <li>Si risolvono le cause di fondo (<em>root cause</em>) prima di ripartire.</li>
+            </ul>
+          </Card>
+          <Card title="Pratiche tipiche" icon={ShieldCheck}>
+            <ul>
+              <li><em>Andon</em> e segnalazioni visive.</li>
+              <li><em>Poka‑Yoke</em> (a prova di errore).</li>
+              <li>Autonomia degli operatori nel fermare la linea.</li>
+            </ul>
+          </Card>
+        </div>
+      </Section>
+
+      {/* Kaizen */}
+      <Section id="kaizen" title="Kaizen (Miglioramento continuo)" subtitle="Piccoli passi, tutti i giorni" icon={RefreshCw}>
+        <div className="grid md:grid-cols-3 gap-6">
+          <Card title="Principi">
+            <ul>
+              <li>Coinvolgere tutte le persone: dal gemba alla direzione.</li>
+              <li>Sperimentare cicli rapidi PDCA (Plan‑Do‑Check‑Act).</li>
+              <li>Standardizzare i miglioramenti che funzionano.</li>
+            </ul>
+          </Card>
+          <Card title="Strumenti">
+            <ul>
+              <li>Eventi <em>Kaizen blitz</em>, A3 problem solving.</li>
+              <li>Hansei (riflessione) e <em>obeya</em> (stanza del progetto).</li>
+              <li>Metriche visuali: lead time, OEE, difetti/milione.</li>
+            </ul>
+          </Card>
+          <Card title="Risultati attesi">
+            <ul>
+              <li>Riduzione costi e tempi.</li>
+              <li>Aumento della qualità e della sicurezza.</li>
+              <li>Crescita delle competenze e motivazione delle persone.</li>
+            </ul>
+          </Card>
+        </div>
+      </Section>
+
+      {/* Confronti */}
+      <Section id="confronti" title="Confronto: Taylorismo, Fordismo e TPS" subtitle="Dalle catene di montaggio al pensiero snello" icon={GitCompare}>
+        <div className="rounded-2xl overflow-x-auto border border-slate-200 dark:border-slate-800">
+          <table className="min-w-full text-sm md:text-base">
+            <thead className="bg-slate-50 dark:bg-slate-900">
+              <tr className="text-left">
+                <th className="p-4">Aspetto</th>
+                <th className="p-4">Taylorismo</th>
+                <th className="p-4">Fordismo</th>
+                <th className="p-4">TPS / Lean</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
+              <tr>
+                <td className="p-4 font-medium">Focus</td>
+                <td className="p-4">Efficienza del singolo compito, tempi e metodi.</td>
+                <td className="p-4">Produzione di massa, standardizzazione del prodotto.</td>
+                <td className="p-4">Flusso di valore, eliminazione sprechi, qualità alla fonte.</td>
+              </tr>
+              <tr>
+                <td className="p-4 font-medium">Organizzazione del lavoro</td>
+                <td className="p-4">Separazione netta tra progettazione e esecuzione.</td>
+                <td className="p-4">Catena di montaggio, compiti ripetitivi.</td>
+                <td className="p-4">Team multifunzionali, miglioramento dal gemba.</td>
+              </tr>
+              <tr>
+                <td className="p-4 font-medium">Gestione scorte</td>
+                <td className="p-4">Produzione spinta (push) basata su piani.</td>
+                <td className="p-4">Grandi lotti e magazzini per stabilizzare la linea.</td>
+                <td className="p-4">Pull, Kanban, piccoli lotti, JIT.</td>
+              </tr>
+              <tr>
+                <td className="p-4 font-medium">Qualità</td>
+                <td className="p-4">Ispezione a valle.</td>
+                <td className="p-4">Reparti qualità dedicati.</td>
+                <td className="p-4">Jidoka: fermo linea e prevenzione difetti.</td>
+              </tr>
+              <tr>
+                <td className="p-4 font-medium">Ruolo delle persone</td>
+                <td className="p-4">Esecuzione secondo tempi standard.</td>
+                <td className="p-4">Operai specializzati per stazione.</td>
+                <td className="p-4">Coinvolgimento e responsabilizzazione (Kaizen, Andon).</td>
+              </tr>
+              <tr>
+                <td className="p-4 font-medium">Contesto ideale</td>
+                <td className="p-4">Ambienti stabili, alta ripetitività.</td>
+                <td className="p-4">Alto volume, bassa varietà.</td>
+                <td className="p-4">Domanda variabile, esigenza di flessibilità e qualità.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Section>
+
+      {/* Casi aziendali */}
+      <Section id="casi" title="Aziende e settori" subtitle="Esempi di applicazione dei diversi metodi" icon={Users}>
+        <div className="grid md:grid-cols-3 gap-6">
+          <Card title="TPS / Lean (esempi noti)" icon={Factory}>
+            <ul>
+              <li><strong>Toyota</strong> (automotive): origine del TPS.</li>
+              <li><strong>Honda</strong> e <strong>Porsche</strong>: trasformazioni lean nelle fabbriche.</li>
+              <li><strong>Intel</strong>, <strong>Dell</strong>: flussi tirati e riduzione lead time in elettronica/PC.</li>
+              <li><strong>Boeing</strong>: applicazioni del <em>moving line</em> e riduzione sprechi.</li>
+              <li><strong>Zara (Inditex)</strong>: risposta rapida e rifornimenti JIT nella moda.</li>
+              <li><strong>Scania</strong>, <strong>BMW</strong>: sistemi di produzione snelli in automotive pesante e premium.</li>
+            </ul>
+          </Card>
+          <Card title="Fordismo (storico e derivazioni)" icon={Landmark}>
+            <ul>
+              <li><strong>Ford Motor Company</strong>: catena di montaggio per la produzione di massa (Model T).</li>
+              <li>Elettrodomestici e auto nel dopoguerra: volumi elevati, bassa varietà.</li>
+              <li>Alcune linee di imbottigliamento/alimentare: elevata standardizzazione.</li>
+            </ul>
+          </Card>
+          <Card title="Taylorismo (tempi & metodi)" icon={Building2}>
+            <ul>
+              <li><strong>Bethlehem Steel</strong> (storico): studi di tempi e cottimi.</li>
+              <li>Catene <strong>fast food</strong> (es. procedure McDonald’s) con forte standardizzazione dei compiti.</li>
+              <li>Call center e centri di servizio: misurazione e ottimizzazione micro‑attività.</li>
+            </ul>
+          </Card>
+        </div>
+        <p className="mt-6 text-slate-600 dark:text-slate-300 text-sm">
+          Gli esempi indicati sono rappresentativi e non esaustivi; molte organizzazioni integrano elementi di più approcci.
+        </p>
+      </Section>
+
+      {/* Risorse */}
+      <Section id="risorse" title="Risorse per approfondire" subtitle="Testi consigliati e parole chiave" icon={BooksIcon}>
+        <div className="grid md:grid-cols-2 gap-6">
+          <Card title="Libri chiave">
+            <ul>
+              <li>Taichi Ohno — <em>Toyota Production System</em>.</li>
+              <li>James P. Womack, Daniel T. Jones, Daniel Roos — <em>The Machine That Changed the World</em>.</li>
+              <li>Shigeo Shingo — <em>A Study of the Toyota Production System</em>.</li>
+            </ul>
+          </Card>
+          <Card title="Parole chiave da cercare">
+            <div className="flex flex-wrap gap-2">
+              {[
+                "Heijunka",
+                "Kanban",
+                "Andon",
+                "Poka‑Yoke",
+                "SMED",
+                "5S",
+                "Takt time",
+                "Obeya",
+                "Hansei",
+                "Value Stream Mapping",
+              ].map((k) => (
+                <Pill key={k}>{k}</Pill>
+              ))}
+            </div>
+          </Card>
+        </div>
+      </Section>
+
+      {/* Footer */}
+      <footer className="border-t border-slate-200 dark:border-slate-800 py-10 mt-10">
+        <div className="mx-auto max-w-6xl px-4 text-sm text-slate-600 dark:text-slate-300">
+          <p>
+            © {new Date().getFullYear()} — Sintesi introduttiva del Toyota Production System. Questo sito è un esempio didattico.
+          </p>
+        </div>
+      </footer>
+
+      {/* Global styles */}
+      <style jsx global>{`
+        html { scroll-behavior: smooth; }
+        .prose ul { margin: 0; }
+      `}</style>
+    </div>
+  );
+}
+
+// Temporary icon until lucide-react exports a dedicated book icon alias above
+function BooksIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+      <path d="M4 4v15.5" />
+      <path d="M20 22V6a2 2 0 0 0-2-2H7" />
+    </svg>
+  );
+}
