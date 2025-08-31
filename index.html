@@ -3,195 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toyota Production System - Metodo Toyota</title>
-    <link rel="icon" href="assets/factory.png" type="image/png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
+    <title>Toyota Production System</title>
+
+    <!-- Link al file CSS interno -->
+    <style>
+        :root {
+            --primary-color: #f39c12; /* Giallo-arancio */
+            --secondary-color: #e67e22; /* Arancione intenso */
+            --success-color: #d35400; /* Arancio scuro */
+            --danger-color: #c0392b; /* Rosso caldo */
+            --warning-color: #f1c40f; /* Giallo dorato */
+            --info-color: #e74c3c; /* Rosso chiaro */
+            --light-color: #f5f5f5; /* Grigio chiaro caldo */
+            --dark-color: #2c3e50; /* Grigio scuro bluastro */
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Reset e impostazioni generali */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--dark-color);
+            scroll-behavior: smooth;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #f5f5f5 0%, #f0e5d8 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-image {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero-image i {
+            font-size: 8rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Icone circolari */
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .icon-circle i.hovered-icon {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        /* Hover effect per le card */
+        .hover-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .hover-card.hovered {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Sezioni alternate */
+        section:nth-child(even) {
+            background-color: var(--light-color);
+        }
+
+        /* Navbar personalizzata */
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        /* Bottoni personalizzati */
+        .btn {
+            border-radius: 25px;
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-lg {
+            padding: 0.75rem 2rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Titoli */
+        .display-1, .display-2, .display-3, .display-4, .display-5 {
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        /* Liste personalizzate */
+        .list-unstyled li {
+            margin-bottom: 0.5rem;
+            padding-left: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+        }
+
+        footer a {
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--info-color) !important;
+        }
+
+        /* Gradient per le sezioni */
+        .bg-gradient-primary {
+            background: linear-gradient(135deg, var(--primary-color), #e67e22);
+        }
+
+        /* Modalità scura */
+        body.dark-mode {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+        }
+
+        /* Evidenziazione delle card nei metodi */
+        .card.highlighted {
+            border: 2px solid #0d6efd;
+            transform: scale(1.02);
+        }
+
+        .card.faded {
+            opacity: 0.7;
+        }
+
+        /* Animazione al scroll */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#home">
-                <i class="fas fa-industry me-2"></i>
-                Toyota Production System
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Toyota Production System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="#home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#principi">Principi TPS</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#confronto">Confronto</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#aziende">Aziende</a>
+                        <a class="nav-link" href="#about">About</a>
                     </li>
                 </ul>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <div class="container">
-            <div class="row align-items-center min-vh-100">
-                <div class="col-lg-6">
-                    <h1 class="display-4 fw-bold text-primary mb-4">
-                        Toyota Production System
-                    </h1>
-                    <p class="lead mb-4">
-                        Un modello di organizzazione che ha trasformato il concetto di produzione industriale, 
-                        portando la Toyota a diventare un esempio globale di efficienza e innovazione.
-                    </p>
-                    <div class="d-flex gap-3">
-                        <a href="#principi" class="btn btn-primary btn-lg">
-                            <i class="fas fa-rocket me-2"></i>
-                            Scopri i Principi
-                        </a>
-                        <a href="#confronto" class="btn btn-outline-primary btn-lg">
-                            <i class="fas fa-balance-scale me-2"></i>
-                            Confronta i Metodi
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="hero-image">
-                        <i class="fas fa-cogs display-1 text-primary opacity-75"></i>
-                    </div>
-                </div>
-            </div>
+    <section class="hero-section" id="home">
+        <div class="hero-image">
+            <i class="fas fa-cogs"></i>
+            <h1 class="display-1">Benvenuti nel Sistema di Produzione Toyota</h1>
         </div>
     </section>
 
-    <!-- Introduzione -->
-    <section class="py-5 bg-light">
+    <section id="about" class="py-5">
+        <h2 class="display-3 text-center">Cosa è TPS?</h2>
         <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mx-auto text-center">
-                    <h2 class="display-5 fw-bold mb-4">Cos'è il Toyota Production System?</h2>
-                    <p class="lead">
-                        Il Toyota Production System (TPS), conosciuto anche come Metodo Toyota, è una filosofia 
-                        gestionale nata in Giappone. Questo approccio ha dato vita alla Lean Production e ha rivoluzionato 
-                        il modo di concepire la produzione a livello globale, promuovendo efficienza, qualità e flessibilità.
-                    </p>
-                </div>
-            </div>
+            <p class="lead text-center">Il Toyota Production System (TPS) è un approccio alla gestione della produzione sviluppato da Toyota che enfatizza la riduzione degli sprechi e l’efficienza.</p>
         </div>
     </section>
 
-    <!-- Principi del TPS -->
-    <section id="principi" class="py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center mb-5">
-                    <h2 class="display-5 fw-bold">I 5 Principi Fondamentali del TPS</h2>
-                    <p class="lead">I pilastri che sostengono il metodo Toyota</p>
-                </div>
-            </div>
-            <div class="row g-4">
-                <!-- Pull -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 shadow-sm hover-card">
-                        <div class="card-body text-center">
-                            <div class="icon-circle bg-primary text-white mb-3">
-                                <i class="fas fa-arrow-left"></i>
-                            </div>
-                            <h5 class="card-title fw-bold">PULL</h5>
-                            <p class="card-text">
-                                Un sistema di produzione che risponde esclusivamente alla domanda del cliente, 
-                                producendo ciò che serve, solo quando serve, evitando sprechi e ottimizzando il flusso produttivo.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+    <footer class="text-center py-3">
+        <a href="#home">Back to Top</a>
+    </footer>
 
-                <!-- MUDA -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 shadow-sm hover-card">
-                        <div class="card-body text-center">
-                            <div class="icon-circle bg-danger text-white mb-3">
-                                <i class="fas fa-times-circle"></i>
-                            </div>
-                            <h5 class="card-title fw-bold">MUDA</h5>
-                            <p class="card-text">
-                                L’eliminazione degli sprechi è alla base del TPS. Ogni attività che non aggiunge valore al prodotto 
-                                finale viene identificata e ridotta, per migliorare l’efficienza complessiva del processo produttivo.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initSmoothScrolling();
+            initActiveNavigation();
+            initScrollAnimations();
+            initCardHoverEffects();
+            initTooltips();
+            addIconEffects();
+            initMobileMenu();
+            highlightMethodDifferences();
+            initBackToTop();
+            loadSavedTheme();
+            logPerformance();
+            console.log('🚗 Toyota Production System - Sito caricato correttamente!');
+        });
 
-                <!-- JIT -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 shadow-sm hover-card">
-                        <div class="card-body text-center">
-                            <div class="icon-circle bg-success text-white mb-3">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <h5 class="card-title fw-bold">JIT (Just In Time)</h5>
-                            <p class="card-text">
-                                La filosofia del "giusto in tempo" mira a produrre solo quando necessario, riducendo al minimo 
-                                le scorte e ottimizzando l’utilizzo delle risorse, riducendo tempi e costi.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+        function initSmoothScrolling() {
+            const navLinks = document.querySelectorAll('a[href^="#"]');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    if (targetSection) {
+                        const offsetTop = targetSection.offsetTop - 80;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
 
-                <!-- Jidoka -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 shadow-sm hover-card">
-                        <div class="card-body text-center">
-                            <div class="icon-circle bg-warning text-white mb-3">
-                                <i class="fas fa-robot"></i>
-                            </div>
-                            <h5 class="card-title fw-bold">JIDOKA</h5>
-                            <p class="card-text">
-                                Un concetto che implica l'automazione con un tocco umano: le macchine sono in grado di fermarsi da sole 
-                                quando si verificano anomalie, garantendo così un controllo qualità in tempo reale e coinvolgendo attivamente 
-                                gli operatori nel processo.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Kaizen -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 shadow-sm hover-card">
-                        <div class="card-body text-center">
-                            <div class="icon-circle bg-info text-white mb-3">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <h5 class="card-title fw-bold">KAIZEN</h5>
-                            <p class="card-text">
-                                Il miglioramento continuo è un principio che pervade ogni livello dell’organizzazione, favorendo l’adozione di 
-                                piccoli cambiamenti quotidiani che portano a risultati straordinari nel lungo periodo.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Confronto con altri metodi -->
-    <section id="confronto" class="py-5 bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center mb-5">
-                    <h2 class="display-5 fw-bold">Confronto con Altri Metodi di Produzione</h2>
-                    <p class="lead">L'evoluzione dei sistemi produttivi industriali</p>
-                </div>
-            </div>
-            <div class="row g-4">
-                <!-- Taylorismo -->
-                <div class="col-lg-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-header bg
+        function initActiveNavigation() {
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+            const sections = document.querySelectorAll('section[id]');
+            const updateActiveLink = () => {
+                let currentSection = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.scrollY >= sectionTop - 150 && window.scrollY < sectionTop + sectionHeight - 150) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${currentSection}`) {
+                        link.classList.add('
